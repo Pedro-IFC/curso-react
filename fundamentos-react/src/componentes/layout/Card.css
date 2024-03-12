@@ -1,0 +1,25 @@
+.Cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.Card{
+    width: calc(100%/3 - 30px);
+    padding: 5px;
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.Title{
+    color: white;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+.Content{
+    border-radius: 0px 0px 12px 12px;
+    display: block;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+}
