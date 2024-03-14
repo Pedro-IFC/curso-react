@@ -1,44 +1,13 @@
 import React, { useReducer, useState } from 'react'
 import PageTitle     from '../../components/layout/PageTitle'
 import SectionTitle from '../../components/layout/SectionTitle';
+import {initialState, reducer} from '../../store';
+import { numberAdd2, numberAdd7, divBy25, arredondar, addAny, login } from '../../store/actions/';
 
-const initialStare = {
-    cart:[],
-    products: [],
-    user: null,
-    number: 0
-}
-function reducer(state, action){
-    switch(action.type){
-        case "add2":
-            return {...state, number: state.number+2}
-        break;
-        case "login":
-            return {...state, user: {...state.user, name: action.name}}
-        break;
-        case "add7":
-            return {...state, number: state.number+7}
-        break;
-        case "div25":
-            return {...state, number: state.number/25}
-        break;
-        case "addany":
-            return {...state, number: state.number+parseInt(action.num)}
-        break;
-        case "arredondar":
-            return {...state, number: parseInt(state.number)}
-        break;
-        default:
-            return state
-    }
-}
 const UseReducer = (props) => {
-    const [state, exec] = useReducer(reducer, initialStare)
+    const [state, dispatch] = useReducer(reducer, initialState);
     const [username, setUserName] = useState("");
-    const [num, setNum] = useState("");
-    /*useEffect(function(){
-        exec({type: "login", name:username});
-    }, [username])*/
+    const [num, setNum] = useState(0);
     return (
         <div className="UseReducer">
             <PageTitle
@@ -49,35 +18,31 @@ const UseReducer = (props) => {
             <div className="center">
                 {state.user?
                     <span className="text">{state.user.name}</span>
-                    : <span className="text">Não está logado</span>
+                    : <span className="text red">Não está logado</span>
                 }
+                <br />
                 <span className="text">{state.number}</span>
                 <div>
-                    <button className="btn" onClick={e=>exec({type:"add2"})}>+2</button>
+                    <button className="btn" onClick={_=>numberAdd2(dispatch)}>+2</button>
                 </div>
                 <div>
-                    <button className="btn" onClick={e=>exec({type:"login", name:username})}>Login</button>
+                    <input type="text" placeholder='Nome' className="input" value={username} onChange={e=>setUserName(e.target.value)} />
+                    <button className="btn" onClick={_=>login(dispatch,username)}>Login</button>
                 </div>
-                <input type="text" className="input" value={username} onChange={e=>setUserName(e.target.value)} />
             </div>
             <SectionTitle title="Exercício #02" />
             <div className="center">
-                <span>{state.number}</span>
+                <br />
+                <span className='text'>{state.number}</span>
                 <div>
-                    <button className="btn" onClick={e=>exec({type:"add2"})}>+2</button>
+                    <button className="btn" onClick={_=>numberAdd2(dispatch)}>+2</button>
+                    <button className="btn" onClick={_=>numberAdd7(dispatch)}>+7</button>
+                    <button className="btn" onClick={_=>divBy25(dispatch)}>%25</button>
+                    <button className="btn" onClick={_=>arredondar(dispatch)}>arredondar</button>
                 </div>
                 <div>
-                    <button className="btn" onClick={e=>exec({type:"add7"})}>+7</button>
-                </div>
-                <div>
-                    <button className="btn" onClick={e=>exec({type:"div25"})}>%25</button>
-                </div>
-                <div>
-                    <button className="btn" onClick={e=>exec({type:"arredondar"})}>arredondar</button>
-                </div>
-                <div>
-                    <button className="btn" onClick={e=>exec({type:"addany", num:num})}>add x</button>
-                    <input type="text" value={num} className="input" onChange={e=>setNum(e.target.value)} />
+                    <input type="number" placeholder='Número' value={num} className="input" onChange={e=>setNum(e.target.value)} />
+                    <button className="btn" onClick={_=>addAny(dispatch, num)}>add x</button>
                 </div>
             </div>
         </div>

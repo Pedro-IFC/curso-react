@@ -17,6 +17,14 @@ body {
     font-weight: 300;
     font-size: 1rem;
     margin: 20px 0px;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 14px 34px;
+    border: 1px solid #0092c3;
+    outline: none;
+    background-color: #FFF;
+    font-size: 1rem;
+    color: #0092c3;
 }
 
 .btn {

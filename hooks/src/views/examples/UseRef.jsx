@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PageTitle from '../../components/layout/PageTitle'
 import SectionTitle from '../../components/layout/SectionTitle'
+
 function merge(val1, val2){
     var valf = "";
     for(var i=0; i<val1.length; i++){
@@ -11,6 +12,7 @@ function merge(val1, val2){
     }
     return valf;
 }
+
 const UseRef = (props) => {
     const [value1, setValue1] = useState("");
     const [value2, setValue2] = useState("");
